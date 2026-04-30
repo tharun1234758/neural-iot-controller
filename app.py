@@ -277,9 +277,10 @@ else:
                 showlegend=True, 
                 margin=dict(l=0, r=0, t=30, b=0),
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-            ) fig.update_traces(fill='tonexty', marker=dict(size=8))
+            ) 
+                fig.update_traces(fill='tonexty', marker=dict(size=8))
             st.plotly_chart(fig, use_container_width=True)
-            else:
+          else:
                 st.info("System Idle. Enable endpoints in the control panel.")
         with right_col:
             st.markdown("#### Port Utilization")
