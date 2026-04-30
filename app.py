@@ -18,13 +18,15 @@ st.markdown("""
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-   /* Apply the font globally to absolutely everything */
-* {
-    font-family: 'Rajdhani', sans-serif !important;
-}
-html, body, [class*="css"], [class*="st-"] {
-    font-family: 'Rajdhani', sans-serif !important;
-}
+/* Apply the custom font safely to text elements */
+   html, body, p, h1, h2, h3, h4, h5, h6, li, label, div {
+       font-family: 'Rajdhani', sans-serif;
+   }
+   
+   /* CRITICAL FIX: Protect Streamlit's built-in icons from being overwritten */
+   .material-icons, .material-symbols-rounded, [data-testid="stIconMaterial"] {
+       font-family: 'Material Symbols Rounded', sans-serif !important;
+   }
 
     /* 2. Custom App Background (Animated Neural Breathing Effect) */
     .stApp {
