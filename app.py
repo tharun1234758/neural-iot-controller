@@ -260,8 +260,7 @@ else:
         with left_col:
             st.markdown("#### Topology Distribution")
             if not active_df.empty:
-            # New sleek Area Chart implementation
-            fig = px.area(
+                fig = px.area(
                 active_df, 
                 x='name', 
                 y='allocated', 
@@ -269,8 +268,7 @@ else:
                 line_shape='spline',
                 color_discrete_map={'Critical': '#FF3366', 'High': '#00D2FF', 'Low': '#00FFAA'}
             )
-            
-            fig.update_layout(
+                fig.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)", 
                 plot_bgcolor="rgba(0,0,0,0)",
                 xaxis_title="", 
@@ -279,13 +277,10 @@ else:
                 showlegend=True, 
                 margin=dict(l=0, r=0, t=30, b=0),
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-            )
-            
-            fig.update_traces(fill='tonexty', marker=dict(size=8))
+            ) fig.update_traces(fill='tonexty', marker=dict(size=8))
             st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("System Idle. Enable endpoints in the control panel.")
-
         with right_col:
             st.markdown("#### Port Utilization")
             if not active_df.empty:
