@@ -51,8 +51,8 @@ st.markdown("""
     
     /* 3. Glowing Gradient Title */
     .main-title {
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 7rem;
+        font-family: 'Rajdhani', sans-serif !important;
+        font-size: 5.5rem !important;
         font-weight: 700;
         background: -webkit-linear-gradient(45deg, #00D2FF, #00FFAA);
         -webkit-background-clip: text;
@@ -60,7 +60,7 @@ st.markdown("""
         letter-spacing: 2px;
         margin-bottom: 0rem;
         text-shadow: 0px 0px 20px rgba(0, 255, 170, 0.2);
-        line-height: 1.3;
+        line-height: 1.2 !important;
         padding-top: 10px;
     }
     
