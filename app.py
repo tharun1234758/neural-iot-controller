@@ -260,17 +260,29 @@ else:
         with left_col:
             st.markdown("#### Topology Distribution")
             if not active_df.empty:
-                fig = px.bar(
-                    active_df, x='allocated', y='name', color='category', orientation='h', text='allocated',
-                    color_discrete_map={'Critical': '#FF3366', 'High': '#00D2FF', 'Low': '#00FFAA'}
-                )
-                fig.update_layout(
-                    paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-                    xaxis_title="Assigned Bandwidth (Mbps)", yaxis_title="",
-                    font=dict(color="#FAFAFA", family="Rajdhani"), showlegend=False, margin=dict(l=0, r=0, t=30, b=0)
-                )
-                fig.update_traces(texttemplate='%{text} Mbps', textposition='outside')
-                st.plotly_chart(fig, use_container_width=True)
+            # New sleek Area Chart implementation
+            fig = px.area(
+                active_df, 
+                x='name', 
+                y='allocated', 
+                color='category',
+                line_shape='spline',
+                color_discrete_map={'Critical': '#FF3366', 'High': '#00D2FF', 'Low': '#00FFAA'}
+            )
+            
+            fig.update_layout(
+                paper_bgcolor="rgba(0,0,0,0)", 
+                plot_bgcolor="rgba(0,0,0,0)",
+                xaxis_title="", 
+                yaxis_title="Bandwidth (Mbps)",
+                font=dict(color="#FAFAFA", family="Rajdhani"), 
+                showlegend=True, 
+                margin=dict(l=0, r=0, t=30, b=0),
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+            )
+            
+            fig.update_traces(fill='tonexty', marker=dict(size=8))
+            st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("System Idle. Enable endpoints in the control panel.")
 
