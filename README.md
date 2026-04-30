@@ -1,1 +1,1 @@
-# neural-iot-controller
+# Neural-iot-controller
