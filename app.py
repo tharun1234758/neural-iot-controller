@@ -18,10 +18,13 @@ st.markdown("""
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-    /* Apply the font globally to all text */
-    html, body, [class*="css"] {
-        font-family: 'Rajdhani', sans-serif !important;
-    }
+   /* Apply the font globally to absolutely everything */
+* {
+    font-family: 'Rajdhani', sans-serif !important;
+}
+html, body, [class*="css"], [class*="st-"] {
+    font-family: 'Rajdhani', sans-serif !important;
+}
 
     /* 2. Custom App Background (Animated Neural Breathing Effect) */
     .stApp {
