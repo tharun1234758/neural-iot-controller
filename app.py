@@ -60,7 +60,7 @@ st.markdown("""
         letter-spacing: 2px;
         margin-bottom: 0rem;
         text-shadow: 0px 0px 20px rgba(0, 255, 170, 0.2);
-        line-height: 1.2 !important;
+        line-height: 1.1!important;
         padding-top: 10px;
     }
     
