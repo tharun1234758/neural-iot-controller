@@ -12,13 +12,13 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (Premium Light Animated Theme with Circuit Graphics) ---
+# --- ADVANCED CUSTOM CSS (Total Light-Mode Overhaul) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-    /* 2. Global Text & Element Colors (Enforcing Dark slate everywhere for visibility) */
+    /* 2. Global Typography & Structural Colors (Enforcing Dark Slate for crisp reading) */
     html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input, label {
         font-family: 'Rajdhani', sans-serif !important;
         color: #0F172A !important; 
@@ -40,7 +40,7 @@ st.markdown("""
         font-family: 'Material Symbols Rounded', sans-serif !important;
     }
 
-    /* 3. Custom App Background (Animated Soft Pulse overlaid with subtle tech abstract graphics) */
+    /* 3. Custom App Background (Animated Soft Pulse overlaid with subtle network graphics) */
     .stApp {
         background: 
             url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop') no-repeat center center fixed,
@@ -57,9 +57,20 @@ st.markdown("""
         100% { background-position: center center, 0% 50%; }
     }
 
-    .block-container { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 95%; }
+    .block-container { padding-top: 2rem; padding-bottom: 2rem; max-width: 95%; }
     
-    /* 4. Glowing Massive Gradient Title */
+    /* 4. Elimination of Streamlit's Default Black Top Header Bar */
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
+    }
+    header[data-testid="stHeader"] * {
+        color: #0F172A !important;
+    }
+    div[data-testid="stDecoration"] {
+        background-image: linear-gradient(90deg, #0284C7 0%, #0F766E 100%) !important;
+    }
+
+    /* 5. Glowing Massive Gradient Title */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
         font-size: 3.5rem !important; 
@@ -74,20 +85,19 @@ st.markdown("""
         padding-top: 10px;
     }
     
-    /* 5. Complete Elimination of Dark Boxes (Sidebar, Metrics, Expanders, and Login panels) */
+    /* 6. Clean Glass-Morphism Cards & Containers (No Black Elements) */
     section[data-testid="stSidebar"] {
         background-color: rgba(248, 250, 252, 0.85) !important;
         border-right: 1px solid #CBD5E1 !important;
     }
 
-    /* Clean light style for all containers */
     div[data-testid="metric-container"], 
     .login-box, 
     div[data-testid="stExpander"],
     .stExpander {
         background: rgba(255, 255, 255, 0.9) !important;
         border: 2px solid rgba(15, 118, 110, 0.2) !important;
-        padding: 20px;
+        padding: 25px;
         border-radius: 15px;
         box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
         backdrop-filter: blur(12px);
@@ -99,21 +109,42 @@ st.markdown("""
         box-shadow: 0 20px 35px -5px rgba(2, 132, 199, 0.12) !important;
     }
 
-    /* Explicitly fix Expander Headers to remove dark background fields */
+    /* Rewrite Expanders to entirely strip internal dark layers */
     div[data-testid="stExpander"] summary, .stExpander summary {
         background-color: transparent !important;
         color: #0F172A !important;
     }
-    
     div[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
         background-color: transparent !important;
     }
 
-    /* Force all form elements, fields, and text-boxes to be white with dark text */
+    /* Force Form Input Boxes, Fields, and Selectors to be crisp clean White */
     div[data-baseweb="input"], input, select, textarea, div[role="button"] {
         background-color: #FFFFFF !important;
         color: #0F172A !important;
         border: 1px solid #CBD5E1 !important;
+    }
+    /* Fix active text focusing colors inside fields */
+    input:focus {
+        color: #0F172A !important;
+    }
+
+    /* Attractive Buttons */
+    .stButton>button {
+        background-image: linear-gradient(90deg, #0284C7 0%, #0F766E 100%) !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+        transition: all 0.2s ease;
+    }
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+    }
+    .stButton>button * {
+        color: #FFFFFF !important;
     }
 
     /* High-Contrast Progress Bars */
@@ -155,12 +186,14 @@ ai_model = train_network_ai()
 # ==========================================
 if not st.session_state.logged_in:
     st.markdown('<div class="login-box">', unsafe_allow_html=True)
-    st.markdown('<p class="main-title" style="font-size: 2.5rem; text-align: center;">SYSTEM LOGIN</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 10px;">SYSTEM LOGIN</p>', unsafe_allow_html=True)
+    st.markdown('<p style="text-align: center; color: #64748B !important; font-weight: 500; font-size: 1.1rem;">Neural IoT Controller Gateway</p>', unsafe_allow_html=True)
     st.write("---")
     
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("Username", value="")
+    password = st.text_input("Password", type="password", value="")
     
+    st.write("") # Spacer
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Login as Admin", use_container_width=True):
