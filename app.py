@@ -60,7 +60,7 @@ st.markdown("""
     /* 4. Glowing Massive Gradient Title (Optimized for Light Background) */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
-        font-size: 5rem !important; 
+        font-size: 4rem !important; 
         font-weight: 600;
         background: -webkit-linear-gradient(45deg, #0284C7, #0F766E);
         -webkit-background-clip: text;
