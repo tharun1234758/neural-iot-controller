@@ -12,16 +12,25 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (Premium Animated Light Interface) ---
+# --- ADVANCED CUSTOM CSS (High-Contrast Light Animated Theme) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-    /* 2. Force Rajdhani globally but protect icons */
-    html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input {
+    /* 2. Global Font Apply & Absolute High-Contrast Text Fixes */
+    html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input, label {
         font-family: 'Rajdhani', sans-serif !important;
-        color: #1E293B !important; /* Premium Slate Dark Text for visibility against light backgrounds */
+        color: #0F172A !important; /* Deep Slate Blue for maximum contrast and readability */
+    }
+
+    /* Target specific Streamlit elements that try to stay white/grey */
+    [data-testid="stMarkdownContainer"] p, 
+    [data-testid="stWidgetLabel"] p,
+    .stTabs button p,
+    div[data-testid="metric-container"] div {
+        color: #0F172A !important;
+        font-weight: 500 !important;
     }
 
     /* CRITICAL FIX: Protect Streamlit's built-in icons from being overwritten */
@@ -32,15 +41,15 @@ st.markdown("""
         font-family: 'Material Symbols Rounded', sans-serif !important;
     }
 
-    /* 3. Custom Light App Background (Animated Soft Cyber-Pulse Fluidity) */
+    /* 3. Custom App Background (Beautiful Light Fluid Animation) */
     .stApp {
-        background: linear-gradient(-45deg, #F8FAFC, #EDF2F7, #E2E8F0, #F1F5F9);
+        background: linear-gradient(-45deg, #F1F5F9, #E2E8F0, #CBD5E1, #F8FAFC);
         background-size: 400% 400%;
-        animation: breathingNetworkLight 20s ease infinite;
+        animation: fluidNetworkLight 15s ease infinite;
         background-attachment: fixed;
     }
 
-    @keyframes breathingNetworkLight {
+    @keyframes fluidNetworkLight {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
@@ -48,71 +57,75 @@ st.markdown("""
 
     .block-container { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 95%; }
     
-    /* 4. Glowing Massive Gradient Title (Adjusted for light background contrast) */
+    /* 4. Glowing Massive Gradient Title (Optimized for Light Background) */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
         font-size: 5.5rem !important; 
         font-weight: 700;
-        background: -webkit-linear-gradient(45deg, #0284C7, #0D9488);
+        background: -webkit-linear-gradient(45deg, #0284C7, #0F766E);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: 2px;
         margin-bottom: 0rem;
-        text-shadow: 0px 4px 12px rgba(13, 148, 136, 0.15);
+        text-shadow: 2px 4px 10px rgba(15, 118, 110, 0.15);
         line-height: 1.2 !important;
         padding-top: 10px;
     }
     
-    /* Elegant Clean Light Metric Cards */
+    /* Premium Clean Glass Metric Cards */
     div[data-testid="metric-container"] {
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(13, 148, 136, 0.2);
+        background: rgba(255, 255, 255, 0.75);
+        border: 2px solid rgba(15, 118, 110, 0.2);
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
         backdrop-filter: blur(12px);
         transition: all 0.3s ease;
     }
     
     div[data-testid="metric-container"]:hover {
         transform: translateY(-5px);
-        border: 1px solid rgba(13, 148, 136, 0.6);
-        box-shadow: 0 20px 25px -5px rgba(13, 148, 136, 0.15);
+        border: 2px solid rgba(2, 132, 199, 0.6);
+        box-shadow: 0 20px 35px -5px rgba(2, 132, 199, 0.15);
     }
     
-    /* Sleek Progress Bars */
+    /* High-Contrast Progress Bars */
     .stProgress > div > div > div > div { 
-        background-image: linear-gradient(90deg, #0284C7 0%, #0D9488 100%);
+        background-image: linear-gradient(90deg, #0284C7 0%, #0F766E 100%);
         border-radius: 10px;
     }
     
-    /* Customize Tabs for Light Interface */
+    /* High-Contrast Tabs */
     .stTabs [data-baseweb="tab-list"] { gap: 24px; }
     .stTabs [data-baseweb="tab"] {
         font-size: 1.3rem;
-        font-weight: 600;
+        font-weight: 700 !important;
         height: 50px;
         background-color: transparent;
         padding-top: 10px;
         padding-bottom: 10px;
     }
     
-    /* Light Mode Login Box Styling */
+    /* Login Box Styling */
     .login-box {
         background: rgba(255, 255, 255, 0.85);
         padding: 40px;
         border-radius: 15px;
-        border: 1px solid rgba(13, 148, 136, 0.3);
+        border: 2px solid rgba(15, 118, 110, 0.3);
         max-width: 500px;
         margin: auto;
         margin-top: 10vh;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
         backdrop-filter: blur(12px);
     }
 
-    /* Force text properties inside inputs/selectors to read dark */
-    input, button, p, span, label, h3, h4 {
-        color: #1E293B !important;
+    /* Sidebar Clean styling */
+    section[data-testid="stSidebar"] {
+        background-color: rgba(248, 250, 252, 0.9) !important;
+        border-right: 1px solid #CBD5E1;
+    }
+    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 {
+        color: #0F172A !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -251,14 +264,14 @@ else:
         with left_col:
             st.markdown("#### Topology Distribution")
             if not active_df.empty:
-                # INTEGRATED AREA CHART
+                # INTEGRATED LIGHT-MODE AREA CHART
                 fig = px.area(
                     active_df, 
                     x='name', 
                     y='allocated', 
                     color='category',
                     line_shape='spline',
-                    color_discrete_map={'Critical': '#FF3366', 'High': '#0284C7', 'Low': '#0D9488'}
+                    color_discrete_map={'Critical': '#FF3366', 'High': '#0284C7', 'Low': '#0F766E'}
                 )
                 
                 fig.update_layout(
@@ -266,13 +279,13 @@ else:
                     plot_bgcolor="rgba(0,0,0,0)",
                     xaxis_title="", 
                     yaxis_title="Bandwidth (Mbps)",
-                    font=dict(color="#1E293B", family="Rajdhani"), 
+                    font=dict(color="#0F172A", family="Rajdhani"), 
                     showlegend=True, 
                     margin=dict(l=0, r=0, t=30, b=0),
                     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
                 )
                 
-                fig.update_traces(fill='tonexty', marker=dict(size=8))
+                fig.update_traces(fill='tonexty', fillcolor='rgba(2, 132, 199, 0.15)', marker=dict(size=8))
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.info("System Idle. Enable endpoints in the control panel.")
@@ -303,7 +316,7 @@ else:
             fig2.add_hline(y=total_bw, line_dash="dash", line_color="red", annotation_text="Limit")
             fig2.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", 
-                font=dict(color="#1E293B", family="Rajdhani")
+                font=dict(color="#0F172A", family="Rajdhani")
             )
             st.plotly_chart(fig2, use_container_width=True)
 
