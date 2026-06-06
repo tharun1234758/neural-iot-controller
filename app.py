@@ -12,28 +12,27 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (High-Contrast Light Animated Theme) ---
+# --- ADVANCED CUSTOM CSS (Premium Light Animated Theme with Circuit Graphics) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-    /* 2. Global Font Apply & Absolute High-Contrast Text Fixes */
+    /* 2. Global Text & Element Colors (Enforcing Dark slate everywhere for visibility) */
     html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input, label {
         font-family: 'Rajdhani', sans-serif !important;
-        color: #0F172A !important; /* Deep Slate Blue for maximum contrast and readability */
+        color: #0F172A !important; 
     }
 
-    /* Target specific Streamlit elements that try to stay white/grey */
     [data-testid="stMarkdownContainer"] p, 
     [data-testid="stWidgetLabel"] p,
     .stTabs button p,
     div[data-testid="metric-container"] div {
         color: #0F172A !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
 
-    /* CRITICAL FIX: Protect Streamlit's built-in icons from being overwritten */
+    /* CRITICAL FIX: Protect Streamlit's built-in icons from breaking */
     .material-icons, 
     .material-symbols-rounded, 
     [data-testid="stIconMaterial"], 
@@ -41,27 +40,30 @@ st.markdown("""
         font-family: 'Material Symbols Rounded', sans-serif !important;
     }
 
-    /* 3. Custom App Background (Beautiful Light Fluid Animation) */
+    /* 3. Custom App Background (Animated Soft Pulse overlaid with subtle tech abstract graphics) */
     .stApp {
-        background: linear-gradient(-45deg, #F1F5F9, #E2E8F0, #CBD5E1, #F8FAFC);
-        background-size: 400% 400%;
-        animation: fluidNetworkLight 15s ease infinite;
+        background: 
+            url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop') no-repeat center center fixed,
+            linear-gradient(-45deg, #F1F5F9, #E2E8F0, #CBD5E1, #F8FAFC);
+        background-size: cover, 400% 400%;
+        background-blend-mode: overlay;
+        animation: fluidNetworkLight 20s ease infinite;
         background-attachment: fixed;
     }
 
     @keyframes fluidNetworkLight {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% { background-position: center center, 0% 50%; }
+        50% { background-position: center center, 100% 50%; }
+        100% { background-position: center center, 0% 50%; }
     }
 
     .block-container { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 95%; }
     
-    /* 4. Glowing Massive Gradient Title (Optimized for Light Background) */
+    /* 4. Glowing Massive Gradient Title */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
-        font-size: 3.5rem !important; 
-        font-weight: 600;
+        font-size: 5.5rem !important; 
+        font-weight: 700;
         background: -webkit-linear-gradient(45deg, #0284C7, #0F766E);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -72,30 +74,41 @@ st.markdown("""
         padding-top: 10px;
     }
     
-    /* Premium Clean Glass Metric Cards */
-    div[data-testid="metric-container"] {
-        background: rgba(255, 255, 255, 0.75);
-        border: 2px solid rgba(15, 118, 110, 0.2);
+    /* 5. Complete Elimination of Dark Boxes (Sidebar, Metrics, Login panels) */
+    section[data-testid="stSidebar"] {
+        background-color: rgba(248, 250, 252, 0.85) !important;
+        border-right: 1px solid #CBD5E1 !important;
+    }
+
+    div[data-testid="metric-container"], .login-box, div[data-testid="stExpander"] {
+        background: rgba(255, 255, 255, 0.8) !important;
+        border: 2px solid rgba(15, 118, 110, 0.2) !important;
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
         backdrop-filter: blur(12px);
         transition: all 0.3s ease;
     }
     
-    div[data-testid="metric-container"]:hover {
-        transform: translateY(-5px);
-        border: 2px solid rgba(2, 132, 199, 0.6);
-        box-shadow: 0 20px 35px -5px rgba(2, 132, 199, 0.15);
+    div[data-testid="metric-container"]:hover, .login-box:hover {
+        border: 2px solid rgba(2, 132, 199, 0.5) !important;
+        box-shadow: 0 20px 35px -5px rgba(2, 132, 199, 0.12) !important;
     }
-    
+
+    /* Force all form elements, fields, and text-boxes to be crisp white/light gray with dark text */
+    div[data-baseweb="input"], input, select, textarea, div[role="button"] {
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        border: 1px solid #CBD5E1 !important;
+    }
+
     /* High-Contrast Progress Bars */
     .stProgress > div > div > div > div { 
         background-image: linear-gradient(90deg, #0284C7 0%, #0F766E 100%);
         border-radius: 10px;
     }
     
-    /* High-Contrast Tabs */
+    /* High-Contrast Navigation Tabs */
     .stTabs [data-baseweb="tab-list"] { gap: 24px; }
     .stTabs [data-baseweb="tab"] {
         font-size: 1.3rem;
@@ -104,28 +117,6 @@ st.markdown("""
         background-color: transparent;
         padding-top: 10px;
         padding-bottom: 10px;
-    }
-    
-    /* Login Box Styling */
-    .login-box {
-        background: rgba(255, 255, 255, 0.85);
-        padding: 40px;
-        border-radius: 15px;
-        border: 2px solid rgba(15, 118, 110, 0.3);
-        max-width: 500px;
-        margin: auto;
-        margin-top: 10vh;
-        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
-        backdrop-filter: blur(12px);
-    }
-
-    /* Sidebar Clean styling */
-    section[data-testid="stSidebar"] {
-        background-color: rgba(248, 250, 252, 0.9) !important;
-        border-right: 1px solid #CBD5E1;
-    }
-    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h3 {
-        color: #0F172A !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -264,7 +255,6 @@ else:
         with left_col:
             st.markdown("#### Topology Distribution")
             if not active_df.empty:
-                # INTEGRATED LIGHT-MODE AREA CHART
                 fig = px.area(
                     active_df, 
                     x='name', 
