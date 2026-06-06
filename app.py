@@ -62,7 +62,7 @@ st.markdown("""
     /* 4. Glowing Massive Gradient Title */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
-        font-size: 5.5rem !important; 
+        font-size: 3.5rem !important; 
         font-weight: 700;
         background: -webkit-linear-gradient(45deg, #0284C7, #0F766E);
         -webkit-background-clip: text;
@@ -74,14 +74,18 @@ st.markdown("""
         padding-top: 10px;
     }
     
-    /* 5. Complete Elimination of Dark Boxes (Sidebar, Metrics, Login panels) */
+    /* 5. Complete Elimination of Dark Boxes (Sidebar, Metrics, Expanders, and Login panels) */
     section[data-testid="stSidebar"] {
         background-color: rgba(248, 250, 252, 0.85) !important;
         border-right: 1px solid #CBD5E1 !important;
     }
 
-    div[data-testid="metric-container"], .login-box, div[data-testid="stExpander"] {
-        background: rgba(255, 255, 255, 0.8) !important;
+    /* Clean light style for all containers */
+    div[data-testid="metric-container"], 
+    .login-box, 
+    div[data-testid="stExpander"],
+    .stExpander {
+        background: rgba(255, 255, 255, 0.9) !important;
         border: 2px solid rgba(15, 118, 110, 0.2) !important;
         padding: 20px;
         border-radius: 15px;
@@ -90,12 +94,22 @@ st.markdown("""
         transition: all 0.3s ease;
     }
     
-    div[data-testid="metric-container"]:hover, .login-box:hover {
+    div[data-testid="metric-container"]:hover, .login-box:hover, div[data-testid="stExpander"]:hover {
         border: 2px solid rgba(2, 132, 199, 0.5) !important;
         box-shadow: 0 20px 35px -5px rgba(2, 132, 199, 0.12) !important;
     }
 
-    /* Force all form elements, fields, and text-boxes to be crisp white/light gray with dark text */
+    /* Explicitly fix Expander Headers to remove dark background fields */
+    div[data-testid="stExpander"] summary, .stExpander summary {
+        background-color: transparent !important;
+        color: #0F172A !important;
+    }
+    
+    div[data-testid="stExpander"] [data-testid="stExpanderDetails"] {
+        background-color: transparent !important;
+    }
+
+    /* Force all form elements, fields, and text-boxes to be white with dark text */
     div[data-baseweb="input"], input, select, textarea, div[role="button"] {
         background-color: #FFFFFF !important;
         color: #0F172A !important;
@@ -271,46 +285,4 @@ else:
                     yaxis_title="Bandwidth (Mbps)",
                     font=dict(color="#0F172A", family="Rajdhani"), 
                     showlegend=True, 
-                    margin=dict(l=0, r=0, t=30, b=0),
-                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-                )
-                
-                fig.update_traces(fill='tonexty', fillcolor='rgba(2, 132, 199, 0.15)', marker=dict(size=8))
-                st.plotly_chart(fig, use_container_width=True)
-            else:
-                st.info("System Idle. Enable endpoints in the control panel.")
-
-        with right_col:
-            st.markdown("#### Port Utilization")
-            if not active_df.empty:
-                for index, row in active_df.iterrows():
-                    st.write(f"**{row['name']}**")
-                    st.progress(float(row['progress_ratio']), text=f"Allocated: {row['allocated']} Mbps")
-
-    # === TAB 2: AI ANALYTICS ===
-    with tab2:
-        st.markdown("### Predictive Machine Learning Engine")
-        if not ai_mode:
-            st.warning("⚠️ Neural Forecast is currently disabled.")
-        else:
-            if predicted_demand > total_bw:
-                st.error(f"🔴 **CRITICAL ALERT:** Projected demand at {simulated_hour}:00 is **{predicted_demand} Mbps**.")
-            else:
-                st.success(f"🟢 **SYSTEM STABLE:** Projected demand at {simulated_hour}:00 is **{predicted_demand} Mbps**.")
-            
-            curve_hours = np.arange(0, 24)
-            curve_predictions = ai_model.predict(curve_hours.reshape(-1, 1))
-            curve_df = pd.DataFrame({'Hour': curve_hours, 'Predicted Mbps': curve_predictions})
-            
-            fig2 = px.line(curve_df, x='Hour', y='Predicted Mbps')
-            fig2.add_hline(y=total_bw, line_dash="dash", line_color="red", annotation_text="Limit")
-            fig2.update_layout(
-                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", 
-                font=dict(color="#0F172A", family="Rajdhani")
-            )
-            st.plotly_chart(fig2, use_container_width=True)
-
-    # === TAB 3: SYSTEM LOGS ===
-    with tab3:
-        st.markdown("### Raw Router Telemetry")
-        st.dataframe(df[['name', 'category', 'weight', 'active', 'allocated']], use_container_width=True, hide_index=True)
+                    margin=dict(l=0, r=0, t=30, b=
