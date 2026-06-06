@@ -73,7 +73,7 @@ st.markdown("""
     /* 5. Glowing Massive Gradient Title */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
-        font-size: 3.5rem !important; 
+        font-size: 5.5rem !important; 
         font-weight: 700;
         background: -webkit-linear-gradient(45deg, #0284C7, #0F766E);
         -webkit-background-clip: text;
@@ -124,6 +124,16 @@ st.markdown("""
         color: #0F172A !important;
         border: 1px solid #CBD5E1 !important;
     }
+    
+    /* REMOVE THE PASSWORD EYE ICON BLACK BOX CONTAINER BACKGROUND */
+    div[data-baseweb="input"] button,
+    div[data-baseweb="input"] div,
+    .stTextInput button,
+    .stTextInput div {
+        background-color: transparent !important;
+        border: none !important;
+    }
+
     /* Fix active text focusing colors inside fields */
     input:focus {
         color: #0F172A !important;
@@ -193,7 +203,7 @@ if not st.session_state.logged_in:
     username = st.text_input("Username", value="")
     password = st.text_input("Password", type="password", value="")
     
-    st.write("") # Spacer
+    st.write("") 
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Login as Admin", use_container_width=True):
