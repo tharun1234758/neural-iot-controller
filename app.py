@@ -12,7 +12,7 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (Total Light-Mode Overhaul & Mobile Fix) ---
+# --- ADVANCED CUSTOM CSS (Total Light-Mode Overhaul & Desktop/Mobile Layout Opt) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
@@ -195,30 +195,36 @@ st.markdown("""
     }
 
     /* =============================================================
-       NEW MOBILE SPECIFIC OPTIMIZATIONS USING MEDIA QUERIES 
+       MOBILE SPECIFIC HARD OVERRIDES VIA MEDIA QUERIES 
        ============================================================= */
     @media (max-width: 768px) {
-        /* Scale down the massive heading slightly on smaller displays to prevent text wrapping */
         .main-title {
-            font-size: 3.2rem !important;
+            font-size: 2.8rem !important;
         }
 
-        /* Compress layout paddings inside the sidebar expander boxes */
+        /* FORCE MAX HORIZONTAL SPACE inside mobile blocks */
+        div[data-testid="stSidebarUserContent"] {
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
+        }
+
+        /* Completely compress parent blocks padding on active small mobile viewports */
         div[data-testid="stExpander"], .stExpander {
-            padding: 10px 12px !important;
-            border-radius: 10px !important;
+            padding: 8px 6px !important; 
+            border-radius: 8px !important;
         }
 
-        /* Adjust label fonts and spacing inside the sidebar so elements fit seamlessly on single lines */
+        /* Aggressively scale down titles & tracking to give items extra breathing space */
         section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
-            font-size: 1.05rem !important;
-            line-height: 1.2 !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.3px !important;
+            line-height: 1.1 !important;
         }
 
-        /* Clean toggle element alignments on mobile screens */
-        section[data-testid="stSidebar"] .stCheckbox, 
-        section[data-testid="stSidebar"] .stToggle {
-            margin-bottom: 4px !important;
+        /* Tighten toggle containers structure to prevent overflow wrapper breaking */
+        div[data-testid="stCheckbox"] label, div[data-testid="stToggle"] label {
+            gap: 4px !important;
         }
     }
     </style>
