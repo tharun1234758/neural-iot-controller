@@ -81,7 +81,7 @@ st.markdown("""
         letter-spacing: 2px;
         margin-bottom: 0rem;
         text-shadow: 2px 4px 10px rgba(15, 118, 110, 0.15);
-        line-height: 1.2 !important;
+        line-height: 1.3 !important;
         padding-top: 10px;
     }
     
@@ -125,12 +125,16 @@ st.markdown("""
         border: 1px solid #CBD5E1 !important;
     }
     
-    /* REMOVE THE PASSWORD EYE ICON BLACK BOX CONTAINER BACKGROUND */
+    /* TARGET ALL INNER ELEMENT SUFFIX SECTIONS AND BUTTON BLOCKS FOR THE PASSWORD TOGGLE EYE */
     div[data-baseweb="input"] button,
     div[data-baseweb="input"] div,
+    [data-testid="InputInlineSuffix"],
+    [data-testid="InputInlineSuffix"] button,
+    [data-testid="InputInlineSuffix"] div,
     .stTextInput button,
     .stTextInput div {
         background-color: transparent !important;
+        background: transparent !important;
         border: none !important;
     }
 
