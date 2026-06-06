@@ -12,13 +12,13 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (Total Light-Mode Overhaul) ---
+# --- ADVANCED CUSTOM CSS (Total Light-Mode Overhaul & Mobile Fix) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 
-    /* 2. Global Typography & Structural Colors (Enforcing Dark Slate for crisp reading) */
+    /* 2. Global Typography & Structural Colors */
     html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input, label {
         font-family: 'Rajdhani', sans-serif !important;
         color: #0F172A !important; 
@@ -81,7 +81,7 @@ st.markdown("""
         letter-spacing: 2px;
         margin-bottom: 0rem;
         text-shadow: 2px 4px 10px rgba(15, 118, 110, 0.15);
-        line-height: 1.2 !important;
+        line-height: 1.3 !important;
         padding-top: 10px;
     }
     
@@ -138,7 +138,7 @@ st.markdown("""
         border: none !important;
     }
 
-    /* CRITICAL FIX: Eliminate the top right main menu dropdown black background container box */
+    /* Eliminate the top right main menu dropdown black background container box */
     div[data-testid="stMainMenuPopover"],
     div[data-testid="stMainMenuPopover"] div,
     ul[role="listbox"],
@@ -192,6 +192,34 @@ st.markdown("""
         background-color: transparent;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    /* =============================================================
+       NEW MOBILE SPECIFIC OPTIMIZATIONS USING MEDIA QUERIES 
+       ============================================================= */
+    @media (max-width: 768px) {
+        /* Scale down the massive heading slightly on smaller displays to prevent text wrapping */
+        .main-title {
+            font-size: 3.2rem !important;
+        }
+
+        /* Compress layout paddings inside the sidebar expander boxes */
+        div[data-testid="stExpander"], .stExpander {
+            padding: 10px 12px !important;
+            border-radius: 10px !important;
+        }
+
+        /* Adjust label fonts and spacing inside the sidebar so elements fit seamlessly on single lines */
+        section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+            font-size: 1.05rem !important;
+            line-height: 1.2 !important;
+        }
+
+        /* Clean toggle element alignments on mobile screens */
+        section[data-testid="stSidebar"] .stCheckbox, 
+        section[data-testid="stSidebar"] .stToggle {
+            margin-bottom: 4px !important;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
