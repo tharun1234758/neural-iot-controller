@@ -285,4 +285,46 @@ else:
                     yaxis_title="Bandwidth (Mbps)",
                     font=dict(color="#0F172A", family="Rajdhani"), 
                     showlegend=True, 
-                    margin=dict(l=0, r=0, t=30, b=
+                    margin=dict(l=0, r=0, t=30, b=0),
+                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+                )
+                
+                fig.update_traces(fill='tonexty', fillcolor='rgba(2, 132, 199, 0.15)', marker=dict(size=8))
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.info("System Idle. Enable endpoints in the control panel.")
+
+        with right_col:
+            st.markdown("#### Port Utilization")
+            if not active_df.empty:
+                for index, row in active_df.iterrows():
+                    st.write(f"**{row['name']}**")
+                    st.progress(float(row['progress_ratio']), text=f"Allocated: {row['allocated']} Mbps")
+
+    # === TAB 2: AI ANALYTICS ===
+    with tab2:
+        st.markdown("### Predictive Machine Learning Engine")
+        if not ai_mode:
+            st.warning("⚠️ Neural Forecast is currently disabled.")
+        else:
+            if predicted_demand > total_bw:
+                st.error(f"🔴 **CRITICAL ALERT:** Projected demand at {simulated_hour}:00 is **{predicted_demand} Mbps**.")
+            else:
+                st.success(f"🟢 **SYSTEM STABLE:** Projected demand at {simulated_hour}:00 is **{predicted_demand} Mbps**.")
+            
+            curve_hours = np.arange(0, 24)
+            curve_predictions = ai_model.predict(curve_hours.reshape(-1, 1))
+            curve_df = pd.DataFrame({'Hour': curve_hours, 'Predicted Mbps': curve_predictions})
+            
+            fig2 = px.line(curve_df, x='Hour', y='Predicted Mbps')
+            fig2.add_hline(y=total_bw, line_dash="dash", line_color="red", annotation_text="Limit")
+            fig2.update_layout(
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", 
+                font=dict(color="#0F172A", family="Rajdhani")
+            )
+            st.plotly_chart(fig2, use_container_width=True)
+
+    # === TAB 3: SYSTEM LOGS ===
+    with tab3:
+        st.markdown("### Raw Router Telemetry")
+        st.dataframe(df[['name', 'category', 'weight', 'active', 'allocated']], use_container_width=True, hide_index=True)
