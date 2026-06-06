@@ -125,7 +125,7 @@ st.markdown("""
         border: 1px solid #CBD5E1 !important;
     }
     
-    /* TARGET ALL INNER ELEMENT SUFFIX SECTIONS AND BUTTON BLOCKS FOR THE PASSWORD TOGGLE EYE */
+    /* Target password eye icon container background and visibility options toggle elements */
     div[data-baseweb="input"] button,
     div[data-baseweb="input"] div,
     [data-testid="InputInlineSuffix"],
@@ -136,6 +136,22 @@ st.markdown("""
         background-color: transparent !important;
         background: transparent !important;
         border: none !important;
+    }
+
+    /* CRITICAL FIX: Eliminate the top right main menu dropdown black background container box */
+    div[data-testid="stMainMenuPopover"],
+    div[data-testid="stMainMenuPopover"] div,
+    ul[role="listbox"],
+    ul[role="listbox"] li,
+    ul[role="listbox"] li * {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        color: #0F172A !important;
+    }
+    
+    ul[role="listbox"] li:hover,
+    ul[role="listbox"] li:hover * {
+        background-color: #E2E8F0 !important;
     }
 
     /* Fix active text focusing colors inside fields */
