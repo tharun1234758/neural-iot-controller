@@ -81,7 +81,7 @@ st.markdown("""
         letter-spacing: 2px;
         margin-bottom: 0rem;
         text-shadow: 2px 4px 10px rgba(15, 118, 110, 0.15);
-        line-height: 1.3 !important;
+        line-height: 1.2 !important;
         padding-top: 10px;
     }
     
