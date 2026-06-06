@@ -12,7 +12,7 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.role = None
 
-# --- ADVANCED CUSTOM CSS (Animated Background, Massive Title & Protected Icons) ---
+# --- ADVANCED CUSTOM CSS (Premium Animated Light Interface) ---
 st.markdown("""
     <style>
     /* 1. Import Custom Tech Font from Google Fonts */
@@ -21,6 +21,7 @@ st.markdown("""
     /* 2. Force Rajdhani globally but protect icons */
     html, body, [class*="css"], [class*="st-"], span, div, p, h1, h2, h3, h4, h5, h6, a, button, input {
         font-family: 'Rajdhani', sans-serif !important;
+        color: #1E293B !important; /* Premium Slate Dark Text for visibility against light backgrounds */
     }
 
     /* CRITICAL FIX: Protect Streamlit's built-in icons from being overwritten */
@@ -31,15 +32,15 @@ st.markdown("""
         font-family: 'Material Symbols Rounded', sans-serif !important;
     }
 
-    /* 3. Custom App Background (Animated Neural Breathing Effect) */
+    /* 3. Custom Light App Background (Animated Soft Cyber-Pulse Fluidity) */
     .stApp {
-        background: linear-gradient(-45deg, #070A14, #0B162C, #0F1D35, #050814);
+        background: linear-gradient(-45deg, #F8FAFC, #EDF2F7, #E2E8F0, #F1F5F9);
         background-size: 400% 400%;
-        animation: breathingNetwork 25s ease infinite;
+        animation: breathingNetworkLight 20s ease infinite;
         background-attachment: fixed;
     }
 
-    @keyframes breathingNetwork {
+    @keyframes breathingNetworkLight {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
@@ -47,45 +48,45 @@ st.markdown("""
 
     .block-container { padding-top: 3.5rem; padding-bottom: 2rem; max-width: 95%; }
     
-    /* 4. Glowing Massive Gradient Title */
+    /* 4. Glowing Massive Gradient Title (Adjusted for light background contrast) */
     .main-title {
         font-family: 'Rajdhani', sans-serif !important;
-        font-size: 3.5rem !important; 
+        font-size: 5.5rem !important; 
         font-weight: 700;
-        background: -webkit-linear-gradient(45deg, #00D2FF, #00FFAA);
+        background: -webkit-linear-gradient(45deg, #0284C7, #0D9488);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         letter-spacing: 2px;
         margin-bottom: 0rem;
-        text-shadow: 0px 0px 20px rgba(0, 255, 170, 0.2);
-        line-height: 1.3 !important;
+        text-shadow: 0px 4px 12px rgba(13, 148, 136, 0.15);
+        line-height: 1.2 !important;
         padding-top: 10px;
     }
     
-    /* Interactive Metric Cards */
+    /* Elegant Clean Light Metric Cards */
     div[data-testid="metric-container"] {
-        background: rgba(15, 20, 30, 0.5);
-        border: 1px solid rgba(0, 255, 170, 0.2);
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(13, 148, 136, 0.2);
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         backdrop-filter: blur(12px);
         transition: all 0.3s ease;
     }
     
     div[data-testid="metric-container"]:hover {
         transform: translateY(-5px);
-        border: 1px solid rgba(0, 255, 170, 0.8);
-        box-shadow: 0 12px 40px 0 rgba(0, 255, 170, 0.3);
+        border: 1px solid rgba(13, 148, 136, 0.6);
+        box-shadow: 0 20px 25px -5px rgba(13, 148, 136, 0.15);
     }
     
     /* Sleek Progress Bars */
     .stProgress > div > div > div > div { 
-        background-image: linear-gradient(90deg, #00D2FF 0%, #00FFAA 100%);
+        background-image: linear-gradient(90deg, #0284C7 0%, #0D9488 100%);
         border-radius: 10px;
     }
     
-    /* Customize Tabs */
+    /* Customize Tabs for Light Interface */
     .stTabs [data-baseweb="tab-list"] { gap: 24px; }
     .stTabs [data-baseweb="tab"] {
         font-size: 1.3rem;
@@ -96,16 +97,22 @@ st.markdown("""
         padding-bottom: 10px;
     }
     
-    /* Login Box Styling */
+    /* Light Mode Login Box Styling */
     .login-box {
-        background: rgba(15, 20, 30, 0.8);
+        background: rgba(255, 255, 255, 0.85);
         padding: 40px;
         border-radius: 15px;
-        border: 1px solid rgba(0, 255, 170, 0.4);
+        border: 1px solid rgba(13, 148, 136, 0.3);
         max-width: 500px;
         margin: auto;
         margin-top: 10vh;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(12px);
+    }
+
+    /* Force text properties inside inputs/selectors to read dark */
+    input, button, p, span, label, h3, h4 {
+        color: #1E293B !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -244,14 +251,14 @@ else:
         with left_col:
             st.markdown("#### Topology Distribution")
             if not active_df.empty:
-                # NEW SLEEK AREA CHART
+                # INTEGRATED AREA CHART
                 fig = px.area(
                     active_df, 
                     x='name', 
                     y='allocated', 
                     color='category',
                     line_shape='spline',
-                    color_discrete_map={'Critical': '#FF3366', 'High': '#00D2FF', 'Low': '#00FFAA'}
+                    color_discrete_map={'Critical': '#FF3366', 'High': '#0284C7', 'Low': '#0D9488'}
                 )
                 
                 fig.update_layout(
@@ -259,7 +266,7 @@ else:
                     plot_bgcolor="rgba(0,0,0,0)",
                     xaxis_title="", 
                     yaxis_title="Bandwidth (Mbps)",
-                    font=dict(color="#FAFAFA", family="Rajdhani"), 
+                    font=dict(color="#1E293B", family="Rajdhani"), 
                     showlegend=True, 
                     margin=dict(l=0, r=0, t=30, b=0),
                     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
@@ -296,7 +303,7 @@ else:
             fig2.add_hline(y=total_bw, line_dash="dash", line_color="red", annotation_text="Limit")
             fig2.update_layout(
                 paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", 
-                font=dict(color="#FAFAFA", family="Rajdhani")
+                font=dict(color="#1E293B", family="Rajdhani")
             )
             st.plotly_chart(fig2, use_container_width=True)
 
